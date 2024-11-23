@@ -8,7 +8,7 @@ oface=cv2.CascadeClassifier('face.xml')
 glasses=cv2.CascadeClassifier('glasses.xml')
 cap=cv2.VideoCapture(0)
 
-img=cv2.imread('me.jpg')
+img=cv2.imread('me.jpg')#把自己的照片取名為me.jpg，並引入
 gray=cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
 faces=oface.detectMultiScale(gray,1.3,5)
 
