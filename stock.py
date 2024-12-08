@@ -4,11 +4,11 @@ from bs4 import BeautifulSoup
 import pymysql
 
 
-db_config = {
+db_config={
     "host":"127.0.0.1",
     "user":"root",
     "password":"0000",
-    "database":"data",  # schema名稱
+    "database":"data",  #schema名稱
     "charset":"utf8"
 }
 # 插入資料
