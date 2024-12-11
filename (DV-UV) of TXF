@@ -1,0 +1,2 @@
+value1=C of data4 - C of data3;
+plot1(value1,"DV-UV",iff(value1>0,red,green));
