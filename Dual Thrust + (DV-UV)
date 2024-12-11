@@ -17,7 +17,7 @@ LC = Lowest(C, Nday);
 vRange = MaxList(HH - LC, HC - LL);
 
 // Step 4: Define vOpen and calculate trigger lines
-if Time = 500 then vOpen = Open;
+if Time = 0500 then vOpen = Open;
 Upperline = vOpen + K1 * vRange;
 Bottomline = vOpen - K2 * vRange;
 
