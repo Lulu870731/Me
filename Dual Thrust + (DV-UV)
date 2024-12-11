@@ -1,33 +1,33 @@
 // File: Combined_DualThrust_ChipFlow.eld
 
-// Step 1: Define inputs and variables for Dual Thrust
+// Dual Thrust輸出和值
 Inputs: K1(0.5), K2(0.5), Nday(5);
 Vars: HH(0), HC(0), LL(0), LC(0);
 Vars: vRange(0);
 Vars: vOpen(0), Upperline(0), Bottomline(0);
 
-// Step 2: Define variables for Chip Flow (Inner vs Outer Volume Difference)
+//  Chip Flow (Inner vs Outer Volume Difference)
 Vars: ChipFlow(0), SignalColor(0);
 
-// Step 3: Calculate Dual Thrust parameters
+// 計算 Dual Thrust 
 HH = Highest(H, Nday);
 HC = Highest(C, Nday);
 LL = Lowest(L, Nday);
 LC = Lowest(C, Nday);
 vRange = MaxList(HH - LC, HC - LL);
 
-// Step 4: Define vOpen and calculate trigger lines
+//定義 vOpen  計算 trigger lines
 if Time = 0500 then vOpen = Open;
 Upperline = vOpen + K1 * vRange;
 Bottomline = vOpen - K2 * vRange;
 
-// Step 5: Calculate Chip Flow indicator (from Data4 and Data3)
+//計算 Chip Flow 指標 (Data4和Data3)
 ChipFlow = Close of Data4 - Close of Data3;
 
-// Determine the color signal based on ChipFlow
+//根據ChipFlow 確定color signal 
 SignalColor = iff(ChipFlow > 0, 1, -1); // 1: Positive (Red), -1: Negative (Green)
 
-// Step 6: Combine Dual Thrust and Chip Flow logic
+//結合Dual Thrust和Chip Flow
 if SignalColor = 1 then begin
     // Enter long positions only if ChipFlow is positive
     if Close crosses over Upperline then 
@@ -40,5 +40,5 @@ if SignalColor = -1 then begin
         SellShort next bar at Bottomline stop;
 end;
 
-// Optional: Plot Chip Flow for visual analysis
+//Plot Chip Flow進行可視化分析
 Plot1(ChipFlow, "DV-UV", iff(SignalColor = 1, Red, Green));
